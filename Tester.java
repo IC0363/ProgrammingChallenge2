@@ -45,7 +45,7 @@ import java.util.*;
       // Add a toString() method that returns a call to the super toString
       // and then the discount in parentheses using the super.valueToString() method
       public String toString(){
-        return super.toString() + " (Discount: " + ShoppingCart.valueToString(discount) + ")";
+        return super.toString() + " (Discount: " + super.valueToString(discount) + ")";
       }
 
   }
@@ -85,7 +85,7 @@ import java.util.*;
           return orderToString() + "\nSub-total: " + valueToString(total) + "\nDiscount: " + valueToString(internalDiscount) + "\nTotal: " +      valueToString(total - internalDiscount);
       }
 
-      public static String valueToString(double value) {
+      private String valueToString(double value) {
           value = Math.rint(value * 100) / 100.0;
           String result = "" + Math.abs(value);
           if(result.indexOf(".") == result.length() - 2) {
@@ -116,18 +116,20 @@ import java.util.*;
         name = n;
         price =p;
       }
-      public String getName(){
-        return name;
-      }
+      
       public double getPrice(){
         return price;
       }
-      public void setName(String n){
-        name = n;
+      public String valueToString(double value){
+        value = Math.rint(value * 100) / 100.0;
+          String result = "" + Math.abs(value);
+          if(result.indexOf(".") == result.length() - 2) {
+              result += "0";
+          }
+          result = "$" + result;
+          return result;
       }
-      public void setPrice(double p){
-        price = p;
-      }
+      
       public String toString(){
         return "name: " + name + " price: " + price;
       }
